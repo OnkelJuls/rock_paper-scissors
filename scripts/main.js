@@ -23,7 +23,6 @@ function getHumanChoice() {
     console.log("Please enter a valid choice!");
   }
 }
-//console.log(getHumanChoice());
 
 function playRound(humanChoice, computerChoice) {
   const validChoices = ["rock", "paper", "scissors"];
@@ -49,32 +48,27 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-  // Initialize scores
   let humanScore = 0;
   let computerScore = 0;
 
-  // Play 5 rounds
   for (let i = 1; i <= 5; i++) {
     console.log(`Round ${i}:`);
-    const humanChoice = getHumanChoice(); // Get the human's choice
-    const computerChoice = getComputerChoice(); // Get the computer's choice
+    const humanChoice = getHumanChoice();
+    const computerChoice = getComputerChoice();
 
-    const roundResult = playRound(humanChoice, computerChoice); // Play one round
+    const roundResult = playRound(humanChoice, computerChoice);
 
-    // Update scores based on the result of the round
     if (roundResult === "human") {
       humanScore++;
     } else if (roundResult === "computer") {
       computerScore++;
     }
 
-    // Display current scores after each round
     console.log(
       `Scores after round ${i}: Human: ${humanScore}, Computer: ${computerScore}\n`
     );
   }
 
-  // Announce the final winner
   if (humanScore > computerScore) {
     console.log(
       `Congratulations! You won the game with a score of ${humanScore} to ${computerScore}.`
