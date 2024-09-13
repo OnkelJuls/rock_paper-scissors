@@ -22,17 +22,19 @@
             <th colspan="2}">Score</th>
           </tr>
           <tr>
-            <td>Human</td>
+            <td>Human:</td>
             <td id="humanScore">0</td>
           </tr>
           <tr>
-            <td>Computer</td>
+            <td>Computer:</td>
             <td id="computerScore">0</td>
           </tr>
         </table>
       </div>
-      <p id="counter"></p>
-      <p id="info"></p>
+      <p id="option">Chose your option :)</p>
+      <p id="info">Game has not started yet...</p>
+      <p id="counter">Round: 0</p>
+
       <div class="buttons">
         <button class="size gameButtons" id="rock">&#x1FAA8;</button>
         <button class="size gameButtons" id="paper">&#128221;</button>
@@ -40,6 +42,18 @@
       </div>
       <button class="size" id="restart">&#8634;</button>
     </div>
+
+    <!--testing a prompt-->
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <p>Do you really want to restart the game?</p>
+        <button id="confirmYes">Yes</button>
+        <button id="confirmNo">No</button>
+      </div>
+    </div>
+
     <script src="./scripts/main.js"></script>
   </body>
 </html>

@@ -1,6 +1,8 @@
 let human = 0;
 let computer = 0;
 let round = 0;
+let hOption;
+let cOption = getComputerChoice();
 
 function getComputerChoice(int) {
   let computerChoice = Math.floor(Math.random() * int);
@@ -21,17 +23,40 @@ const humanScore = document.querySelector("#humanScore");
 const computerScore = document.querySelector("#computerScore");
 const info = document.querySelector("#info");
 const gameButtons = document.querySelectorAll(".gameButtons");
+const confirmModal = document.querySelector("#confirmModal");
+const confirmYes = document.querySelector("#confirmYes");
+const confirmNo = document.querySelector("#confirmNo");
+const playerOption = document.querySelector("#option");
 
-restart.addEventListener("click", () => {
+// Show the custom confirmation modal when the restart button is clicked
+// restartButton.addEventListener("click", () => {
+//   confirmModal.style.display = "flex"; // Show the modal
+// });
+
+// If user clicks 'Yes', proceed with the game restart
+confirmYes.addEventListener("click", () => {
   human = 0;
   computer = 0;
   round = 0;
   counter.textContent = `Round: ${round}`;
   humanScore.textContent = 0;
+  option.textContent = "Chose your option :)";
   computerScore.textContent = 0;
   showButtons();
-  info.textContent = "";
-  console.log("restarted the game");
+  info.classList.remove("hwin");
+  info.classList.remove("cwin");
+  info.textContent = "Game has not started yet...";
+  confirmModal.style.display = "none"; // Hide the modal after confirmation
+  // Additional restart logic goes here (e.g., resetting game state)
+});
+
+// If user clicks 'No', simply hide the confirmation modal
+confirmNo.addEventListener("click", () => {
+  confirmModal.style.display = "none"; // Hide the modal without restarting
+});
+
+restart.addEventListener("click", () => {
+  confirmModal.style.display = "flex";
 });
 function hideButtons() {
   gameButtons.forEach((button) => {
@@ -66,15 +91,13 @@ function getHumanChoice(humanChoice) {
 function score(win) {
   if (win === "computer") {
     computer += 1;
-    info.textContent = "Computer won this round!";
+    info.innerHTML = `<span style="color: red;">Computer won this round!</span>`;
   } else if (win === "human") {
     human += 1;
-    info.textContent = "Human won this round!";
+    info.innerHTML = `<span style="color: green;">Human won this round!</span>`;
   } else {
-    info.textContent = "This round was a tie!";
+    info.innerHTML = `<span style="color: blue;">This round was a tie!</span>`;
   }
-
-  console.log(` human got: ${human}, computer got: ${computer}`);
 
   humanScore.textContent = `${human}`;
   computerScore.textContent = `${computer}`;
@@ -86,15 +109,16 @@ function roundCounter() {
   counter.textContent = `Round: ${round}`;
 }
 function wins() {
-  if (human === 5) {
-    console.log("human won");
+  if (human === 2) {
     human = 0;
     computer = 0;
     hideButtons();
     info.textContent = `Human won in ${round} rounds! Restart the Game!`;
-  } else if (computer === 5) {
+    info.classList.add("hwin");
+  } else if (computer === 2) {
     info.textContent = `Computer won in ${round} rounds! Restart the Game!`;
-    console.log("computer won");
+    info.classList.add("cwin");
+
     computer = 0;
     human = 0;
     hideButtons();
@@ -103,8 +127,8 @@ function wins() {
   }
 }
 function playRound(humanChoice, computerChoice) {
+  option.innerHTML = `You chose: <span style="color: green;"> ${humanChoice}</span>  Computer chose: <span style="color: red;">${computerChoice}</span>`;
   if (humanChoice === computerChoice) {
-    console.log(`%cIt's a tie!`, "color:blue;");
     score("tie");
     return "tie";
   } else if (
@@ -112,7 +136,6 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "paper" && computerChoice === "scissors") ||
     (humanChoice === "scissors" && computerChoice === "rock")
   ) {
-    console.log(`%cComputer won!`, "color:red;");
     score("computer");
     return "computer";
   } else if (
@@ -120,7 +143,6 @@ function playRound(humanChoice, computerChoice) {
     (computerChoice === "paper" && humanChoice === "scissors") ||
     (computerChoice === "scissors" && humanChoice === "rock")
   ) {
-    console.log("%cHuman won!", "color:green;");
     score("human");
     return "human";
   } else {
