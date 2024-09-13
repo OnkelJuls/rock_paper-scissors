@@ -8,13 +8,38 @@
   </head>
   <body>
     <div class="game">
-      <div class="score"><p id="score">Score:</p></div>
-      <div class="buttons">
-        <button id="rock">&#x1FAA8;</button>
-        <button id="paper">&#128221;</button>
-        <button id="scissors">&#9986;</button>
-        <script src="./scripts/main.js"></script>
+      <div class="rules">
+        <p id="rules">
+          How to play:<br />
+          You are playing against a Computer.<br />
+          First player to get 5 Rounds Wins.<br />
+          You can restart the Game at any Time.
+        </p>
       </div>
+      <div class="score">
+        <table>
+          <tr>
+            <th colspan="2}">Score</th>
+          </tr>
+          <tr>
+            <td>Human</td>
+            <td id="humanScore">0</td>
+          </tr>
+          <tr>
+            <td>Computer</td>
+            <td id="computerScore">0</td>
+          </tr>
+        </table>
+      </div>
+      <p id="counter"></p>
+      <p id="info"></p>
+      <div class="buttons">
+        <button class="size gameButtons" id="rock">&#x1FAA8;</button>
+        <button class="size gameButtons" id="paper">&#128221;</button>
+        <button class="size gameButtons" id="scissors">&#9986;</button>
+      </div>
+      <button class="size" id="restart">&#8634;</button>
     </div>
+    <script src="./scripts/main.js"></script>
   </body>
 </html>

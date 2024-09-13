@@ -1,5 +1,6 @@
 let human = 0;
 let computer = 0;
+let round = 0;
 
 function getComputerChoice(int) {
   let computerChoice = Math.floor(Math.random() * int);
@@ -15,6 +16,33 @@ function getComputerChoice(int) {
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const restart = document.querySelector("#restart");
+const humanScore = document.querySelector("#humanScore");
+const computerScore = document.querySelector("#computerScore");
+const info = document.querySelector("#info");
+const gameButtons = document.querySelectorAll(".gameButtons");
+
+restart.addEventListener("click", () => {
+  human = 0;
+  computer = 0;
+  round = 0;
+  counter.textContent = `Round: ${round}`;
+  humanScore.textContent = 0;
+  computerScore.textContent = 0;
+  showButtons();
+  info.textContent = "";
+  console.log("restarted the game");
+});
+function hideButtons() {
+  gameButtons.forEach((button) => {
+    button.style.display = "none"; // Directly set display to 'none'
+  });
+}
+function showButtons() {
+  gameButtons.forEach((button) => {
+    button.style.display = "flex"; // Directly set display to 'none'
+  });
+}
 
 rock.addEventListener("click", () => {
   playRound(getHumanChoice("rock"), getComputerChoice(3));
@@ -32,32 +60,44 @@ function getHumanChoice(humanChoice) {
   const humanChoices = ["rock", "paper", "scissors"];
   if (humanChoices.includes(humanChoice)) {
     return humanChoice;
-  } else {
-    console.log("%cPlease enter a valid Choice!", "color:red;");
   }
 }
 
 function score(win) {
   if (win === "computer") {
     computer += 1;
+    info.textContent = "Computer won this round!";
   } else if (win === "human") {
     human += 1;
+    info.textContent = "Human won this round!";
   } else {
+    info.textContent = "This round was a tie!";
   }
-  console.log(`human got: ${human}, computer got: ${computer}`);
+
+  console.log(` human got: ${human}, computer got: ${computer}`);
+
+  humanScore.textContent = `${human}`;
+  computerScore.textContent = `${computer}`;
+  roundCounter();
   wins();
+}
+function roundCounter() {
+  round += 1;
+  counter.textContent = `Round: ${round}`;
 }
 function wins() {
   if (human === 5) {
     console.log("human won");
     human = 0;
     computer = 0;
-    confirm("Want to play another game?");
+    hideButtons();
+    info.textContent = `Human won in ${round} rounds! Restart the Game!`;
   } else if (computer === 5) {
+    info.textContent = `Computer won in ${round} rounds! Restart the Game!`;
     console.log("computer won");
     computer = 0;
     human = 0;
-    confirm("Want to play another game?");
+    hideButtons();
   } else {
     return;
   }
