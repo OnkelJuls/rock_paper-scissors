@@ -109,13 +109,13 @@ function roundCounter() {
   counter.textContent = `Round: ${round}`;
 }
 function wins() {
-  if (human === 2) {
+  if (human === 5) {
     human = 0;
     computer = 0;
     hideButtons();
     info.textContent = `Human won in ${round} rounds! Restart the Game!`;
     info.classList.add("hwin");
-  } else if (computer === 2) {
+  } else if (computer === 5) {
     info.textContent = `Computer won in ${round} rounds! Restart the Game!`;
     info.classList.add("cwin");
 
